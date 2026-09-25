@@ -51,7 +51,7 @@ switch (choice) {
         addCandidates(candidates)
         continue
     case 2: 
-        candidatesAffichage(candidates)
+        AffichageTypes(candidates)
         continue
     case 3:
         VotersNumber(candidates)
@@ -105,11 +105,29 @@ function addCandidate(candidatesList) {
 
 
 // Afficher candidates
+function AffichageTypes(candidatesList) {
+    console.log(`--- Afficher Candidates ---`)
+    console.log(`1. Display candidates sorted by votes`)
+    console.log(`2. Display candidates filtered by political party`)
+
+    let affichageChoice = Number(prompt("Choice: "))
+
+    switch (affichageChoice) {
+        case 1:
+            candidatesAffichage(candidatesList)
+            return 0
+        case 2: 
+            let filter = prompt("Enter The Political Party: ")
+            affichageByFilter(candidatesList, filter)
+            return 0
+    }
+}
 function candidatesAffichage (candidatesList) {
+    let sorted = sortCandidates(candidatesList)
     console.log(`--- Candidates List ---`)
 
-    for (let candidate of candidatesList) {
-        let n = candidatesList.indexOf(candidate) + 1
+    for (let candidate of sorted) {
+        let n = sorted.indexOf(candidate) + 1
         console.log(`# Candidat ${n}:`)
         console.log(`CIN: ${candidate.cin}`)
         console.log(`last Name: ${candidate.lastName}`)
@@ -120,7 +138,20 @@ function candidatesAffichage (candidatesList) {
         console.log(`------------`)
     }
 }
-
+function affichageByFilter(candidatesList, filter) {
+   let filtered = candidatesList.filter(can => can.politicalParty == filter)
+   for (let candidate of filtered) {
+        let n = filtered.indexOf(candidate) + 1
+        console.log(`# Candidat ${n}:`)
+        console.log(`CIN: ${candidate.cin}`)
+        console.log(`last Name: ${candidate.lastName}`)
+        console.log(`First Name: ${candidate.firstName}`)
+        console.log(`Political Party: ${candidate.politicalParty}`)
+        console.log(`Age: ${candidate.age}`)
+        console.log(`Voters: ${candidate.voters}`)
+        console.log(`------------`)
+}
+}
 
 // Bubble Sort
 function sortCandidates(candidatesList) {
@@ -243,11 +274,11 @@ function statistics(candidatesList) {
       
 
     // top 3 candidates
-    let sorted = sortCandidates(candidatesList)
-    console.log(`--- TOP 3 ---`)
-    console.log(`Top 1: ${sorted[0]}`)
-    console.log(`Top 2: ${sorted[1]}`)
-    console.log(`Top 3: ${sorted[2]}`)
+    let sorted = sortCandidates(candidatesList);
+    console.log(`--- TOP 3 ---`);
+    if (sorted[0]) console.log(`Top 1: ${sorted[0].firstName} ${sorted[0].lastName} (${sorted[0].voters.length} votes)`);
+    if (sorted[1]) console.log(`Top 2: ${sorted[1].firstName} ${sorted[1].lastName} (${sorted[1].voters.length} votes)`);
+    if (sorted[2]) console.log(`Top 3: ${sorted[2].firstName} ${sorted[2].lastName} (${sorted[2].voters.length} votes)`);
     
 }
 
