@@ -122,6 +122,23 @@ function candidatesAffichage (candidatesList) {
 }
 
 
+// Bubble Sort
+function sortCandidates(candidatesList) {
+    let temp = {}
+    let candidatesCopy = [...candidatesList]
+   for (let i = 0; i < candidatesCopy.length; i++) {
+    for (let j = 0; j < candidatesCopy.length - 1; j++) {
+        if (candidatesCopy[j].voters.length < candidatesCopy[j + 1].voters.length) {
+            temp = candidatesCopy[j]
+            candidatesCopy[j] = candidatesCopy[j + 1]
+            candidatesCopy[j + 1] = temp
+        }
+    }
+   }
+   return candidatesCopy
+}
+
+
 // Add votes
 function VotersNumber (candidatesList) {
     console.log(`--- Vote For A Candidate ---`)
@@ -211,29 +228,27 @@ function searchForCandidate(candidatesList) {
 
 // Election statistics
 function statistics(candidatesList) {
+    console.log(`--- Statistics ---`)
+
     // total number
-    let tCount = 0;
-    for (let candidate of candidatesList) {
-        tCount++
-    }
+    let tCount = candidatesList.length
+    console.log(`Total Candidates: ${tCount}`)
 
     // total votes
     let vCount = 0;
     for (let candidate of candidatesList) {
-        vCount = vCount + (1 * candidate.voters.lenght - 1)
+        vCount += candidate.voters.length
     }
+    console.log(`Voters Count: ${vCount}`)
       
 
     // top 3 candidates
-    let top3 = []
-    let max = {}
-    for (let candidate of candidatesList) {
-        if (max.voters.lenght < candidate.voters.lenght && !top3.includes(candidate)) {
-            max = candidate
-        } 
-        top3.push(max)
-        max = {}
-    }
+    let sorted = sortCandidates(candidatesList)
+    console.log(`--- TOP 3 ---`)
+    console.log(`Top 1: ${sorted[0]}`)
+    console.log(`Top 2: ${sorted[1]}`)
+    console.log(`Top 3: ${sorted[2]}`)
+    
 }
 
 
