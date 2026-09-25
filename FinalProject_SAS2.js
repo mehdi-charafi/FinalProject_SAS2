@@ -1,13 +1,80 @@
 const prompt = require('prompt-sync')();
-const candidates = [];
+const candidates = [{
+    cin: 11111,
+    lastName: "Benjelloun",
+    firstName: "Amine",
+    politicalParty: "Parti de l'Avenir (PDA)",
+    age: 45,
+    voters: []
+  },
+  {
+    cin: 22222,
+    lastName: "Alami",
+    firstName: "Sarah",
+    politicalParty: "Union Écologique (UE)",
+    age: 38,
+    voters: []
+  },
+  {
+    cin: 33333,
+    lastName: "Idrissi",
+    firstName: "Omar",
+    politicalParty: "Rassemblement Démocratique (RD)",
+    age: 52,
+    voters: []
+  },
+  {
+    cin: 44444,
+    lastName: "Tazi",
+    firstName: "Yasmine",
+    politicalParty: "Parti Réformateur (PR)",
+    age: 29,
+    voters: []
+  }];
 const votersIds = [];
 
 
-// Call Functions
-addCandidates(candidates)
-candidatesAffichage(candidates)
-VotersNumber(candidates)
-editCandidate(candidates)
+// switch
+while(true) {
+    console.log("0. Exit")
+    console.log("1. Add Candidates")
+    console.log("2. Afficher Candidates")
+    console.log("3. Vote")
+    console.log("4. Edit Candidate")
+    console.log("5. Delete Candidates")
+    console.log("6. Search For Candidate")
+    console.log("7. Statistics")
+    let choice = Number(prompt("Choice: "))
+    
+switch (choice) {
+    case 1:
+        addCandidates(candidates)
+        continue
+    case 2: 
+        candidatesAffichage(candidates)
+        continue
+    case 3:
+        VotersNumber(candidates)
+        continue
+    case 4:
+        editCandidate(candidates)
+        continue
+    case 5: 
+        DeletionNum(candidates)
+        continue
+    case 6:
+        searchForCandidate(candidates)
+        continue
+    case 7:
+        statistics(candidates)
+        continue
+    case 0:
+        return 0
+
+
+}
+}
+
 
 
 // Add candidates
@@ -65,11 +132,20 @@ function VotersNumber (candidatesList) {
     }
 }   
 function voteForCandidate(candidatesList) {
-    let voterId = prompt("Enter Your ID: ")
+    let voterId = Number(prompt("Enter Your ID: "))
     if (!votersIds.includes(voterId)) {
-        let candidateId = prompt("Enter The Candidate ID: ")
-        candidatesList.push(voterId)
-        console.log(`Vote is done!`)
+        let candidateId = Number(prompt("Enter The Candidate ID: "))
+        for (let candidate of candidatesList) {
+            if (candidate.cin == candidateId) {
+                candidate.voters.push(voterId)
+                votersIds.push(voterId)
+                console.log(`Vote is done!`)
+                return 0
+            }
+        }
+        console.log("Candidate is not found!")
+        
+        
     } else {
         console.log("You have already voted and you are not allowed to change your vote or vote again.")
     }
@@ -99,18 +175,65 @@ function editCandidate(candidatesList) {
 // Delete candidates
 function DeletionNum(candidatesList) {
     let candidateNum = Number(prompt("How many candidates you want to delete ?"))
-}
-function DeleteCandidate(candidatesList) {
+    for (let i = 1; i <= candidateNum; i++) {
     let candidateId = Number(prompt("Enter the candidate ID: "))
-
-    for (let candidate of candidatesList) {
-        if (candidate.cin == id) {
-             
-             
-             
-             console.log(candidate)
-             return 0
-        }   
+        DeleteCandidate(candidatesList, candidateId)
     }
 
 }
+function DeleteCandidate(candidatesList, candidateId) {
+    
+
+    for (let candidate of candidatesList) {
+        if (candidate.cin == candidateId) {
+             let index = candidatesList.indexOf(candidate)
+             candidatesList.splice(index, 1)
+             console.log("Candidate is deleted!")
+             return 0
+        }   
+    }
+}
+
+
+// Search for candidates
+function searchForCandidate(candidatesList) {
+    let candidateName = prompt("Enter the candidate last name: ")
+    for (let candidate of candidatesList) {
+        if (candidate.lastName == candidateName) {
+            console.log("Candidate is found!")
+            console.log(candidate)
+            return 0
+        }
+    }
+    console.log("Candidate is not found!")
+}
+
+
+// Election statistics
+function statistics(candidatesList) {
+    // total number
+    let tCount = 0;
+    for (let candidate of candidatesList) {
+        tCount++
+    }
+
+    // total votes
+    let vCount = 0;
+    for (let candidate of candidatesList) {
+        vCount = vCount + (1 * candidate.voters.lenght - 1)
+    }
+      
+
+    // top 3 candidates
+    let top3 = []
+    let max = {}
+    for (let candidate of candidatesList) {
+        if (max.voters.lenght < candidate.voters.lenght && !top3.includes(candidate)) {
+            max = candidate
+        } 
+        top3.push(max)
+        max = {}
+    }
+}
+
+
