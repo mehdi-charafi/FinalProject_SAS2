@@ -1,7 +1,12 @@
 const prompt = require('prompt-sync')();
 const candidates = [];
 
-addCandidate(candidates)
+function addCandidates(candidatesList) {
+    let candidatesNum = Number(prompt("How many candidates ?"))
+    for (let i = 1; i <= candidatesNum; i++) {
+        addCandidate(candidatesList)
+    }
+}
 
 function addCandidate(candidatesList) {
 
