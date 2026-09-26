@@ -208,9 +208,17 @@ function editCandidate(candidatesList) {
     
     for (let candidate of candidatesList) {
         if (candidate.cin == id) {
-             
+             console.log("1. Edit Political Party")
+             console.log("2. Edit Age")
+             let choice = Number(prompt("Choice: "))
+             switch (choice) {
+             case 1:
              candidate.politicalParty = validString("New Political Party: ")
+             break
+             case 2:
              candidate.age = validNumber("New Age: ")
+             break
+             }
              console.log("Informations are updated!")
              console.log(candidate)
              return 0
