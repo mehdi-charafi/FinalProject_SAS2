@@ -212,7 +212,7 @@ function editCandidate(candidatesList) {
 
 // Delete candidates
 function DeletionNum(candidatesList) {
-    let candidateNum = Number(prompt("How many candidates you want to delete ?"))
+    let candidateNum = Number(prompt("How many candidates you want to delete ? "))
     for (let i = 1; i <= candidateNum; i++) {
     let candidateId = Number(prompt("Enter the candidate ID: "))
         DeleteCandidate(candidatesList, candidateId)
@@ -286,6 +286,9 @@ function statistics(candidatesList) {
        console.log(`${party}: ${partyCounts[party]}`);
     }
     }
+
+
+    
 
     
     
