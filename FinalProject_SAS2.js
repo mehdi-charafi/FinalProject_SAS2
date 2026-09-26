@@ -272,14 +272,32 @@ function statistics(candidatesList) {
     }
     console.log(`Voters Count: ${vCount}`)
       
-
     // top 3 candidates
     let sorted = sortCandidates(candidatesList);
     console.log(`--- TOP 3 ---`);
     if (sorted[0]) console.log(`Top 1: ${sorted[0].firstName} ${sorted[0].lastName} (${sorted[0].voters.length} votes)`);
     if (sorted[1]) console.log(`Top 2: ${sorted[1].firstName} ${sorted[1].lastName} (${sorted[1].voters.length} votes)`);
     if (sorted[2]) console.log(`Top 3: ${sorted[2].firstName} ${sorted[2].lastName} (${sorted[2].voters.length} votes)`);
+
+    // Candidates count for each political party
+    console.log(`--- Candidates per Party ---`);
+    let partyCounts = {};
+
+    for (let candidate of candidatesList) {
+    let party = candidate.politicalParty;
+    if (partyCounts[party]) {
+        partyCounts[party]++;
+    } else {
+        partyCounts[party] = 1;
+    }
+    }
+
+    for (let party in partyCounts) {
+       console.log(`${party}: ${partyCounts[party]}`);
+    }
+    }
+
     
-}
+    
 
 
