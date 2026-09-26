@@ -21,7 +21,7 @@ const candidates = [
   { cin: "ST012345", lastName: "Fassi", firstName: "Khadija", politicalParty: "PAM", age: 31,
     voters: [] },
 ];
-const votersIds = [];
+
 
 
 
@@ -182,12 +182,11 @@ function VotersNumber (candidatesList) {
 }   
 function voteForCandidate(candidatesList) {
     let voterId = prompt("Enter Your ID: ")
-    if (!votersIds.includes(voterId)) {
+    if (!candidatesList.find(can => can.voters.includes(voterId))) {
         let candidateId = prompt("Enter The Candidate ID: ")
         for (let candidate of candidatesList) {
             if (candidate.cin == candidateId) {
                 candidate.voters.push(voterId)
-                votersIds.push(voterId)
                 console.log(`Vote is done!`)
                 return 0
             }
@@ -270,11 +269,11 @@ function searchForCandidate(candidatesList) {
 function statistics(candidatesList) {
     console.log(`--- Statistics ---`)
 
-    // total number
+    // total candidates number
     let tCount = candidatesList.length
     console.log(`Total Candidates: ${tCount}`)
 
-    // total votes
+    // total votes number
     let vCount = 0;
     for (let candidate of candidatesList) {
         vCount += candidate.voters.length
