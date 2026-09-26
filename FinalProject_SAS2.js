@@ -311,7 +311,7 @@ function statistics(candidatesList) {
         let input 
         do {
         input = Number(prompt(promp))
-        } while (isNaN(input) || input === 0 && input == "")
+        } while (isNaN(input) || input === 0 || input == "")
             return input
     }
     function validString(promp) {
