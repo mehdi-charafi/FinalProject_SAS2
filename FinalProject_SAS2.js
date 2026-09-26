@@ -24,6 +24,7 @@ const candidates = [
 const votersIds = [];
 
 
+
 // switch
 while(true) {
     console.log("0. Exit")
@@ -69,18 +70,22 @@ switch (choice) {
 
 // Add candidates
 function addCandidates(candidatesList) {
-    let candidatesNum = Number(prompt("How many candidates ? "))
+    let candidatesNum = validNumber("How many candidates ? ")
     for (let i = 1; i <= candidatesNum; i++) {
         addCandidate(candidatesList)
     }
 }
 function addCandidate(candidatesList) {
 
-    let cin = Number(prompt("Cin: "))
-    let lastName = prompt("Last Name: ")
-    let firstName = prompt("First Name: ")
-    let politicalParty = prompt("Political Party: ")
-    let age = Number(prompt("Age: "))
+    let cin = validNumber("Cin: ")
+    if (candidatesList.find(can => can.cin == cin) != undefined) {
+        console.log("The candidate ID is already used!")
+        return 0
+    }
+    let lastName = validString("Last Name: ")
+    let firstName = validString("First Name: ")
+    let politicalParty = validString("Political Party: ")
+    let age = Number(validNumber("Age: "))
 
     let candidate = {
         cin: cin,
@@ -107,7 +112,7 @@ function AffichageTypes(candidatesList) {
             candidatesAffichage(candidatesList)
             return 0
         case 2: 
-            let filter = prompt("Enter The Political Party: ")
+            let filter = validString("Enter The Political Party: ")
             affichageByFilter(candidatesList, filter)
             return 0
     }
@@ -130,6 +135,10 @@ function candidatesAffichage (candidatesList) {
 }
 function affichageByFilter(candidatesList, filter) {
    let filtered = candidatesList.filter(can => can.politicalParty == filter)
+   if (filtered.length == 0) {
+    console.log("Nothing is found!")
+    return 0
+   }
    for (let candidate of filtered) {
         let n = filtered.indexOf(candidate) + 1
         console.log(`# Candidat ${n}:`)
@@ -164,15 +173,15 @@ function sortCandidates(candidatesList) {
 function VotersNumber (candidatesList) {
     console.log(`--- Vote For A Candidate ---`)
 
-    let votersNum = Number(prompt("Enter the voters number: "))
+    let votersNum = validNumber("Enter the voters number: ")
     for (let i = 1; i <= votersNum; i++) {
         voteForCandidate(candidatesList)
     }
 }   
 function voteForCandidate(candidatesList) {
-    let voterId = Number(prompt("Enter Your ID: "))
+    let voterId = validNumber("Enter Your ID: ")
     if (!votersIds.includes(voterId)) {
-        let candidateId = Number(prompt("Enter The Candidate ID: "))
+        let candidateId = validNumber("Enter The Candidate ID: ")
         for (let candidate of candidatesList) {
             if (candidate.cin == candidateId) {
                 candidate.voters.push(voterId)
@@ -194,13 +203,13 @@ function voteForCandidate(candidatesList) {
 function editCandidate(candidatesList) {
     console.log(`--- Edit Candidates ---`)
 
-    let id = Number(prompt("Enter the candidate ID: "))
+    let id = validNumber("Enter the candidate ID: ")
     
     for (let candidate of candidatesList) {
         if (candidate.cin == id) {
              
-             candidate.politicalParty = prompt("New Political Party: ")
-             candidate.age = Number(prompt("New Age: "))
+             candidate.politicalParty = validString("New Political Party: ")
+             candidate.age = validNumber("New Age: ")
              console.log("Informations are updated!")
              console.log(candidate)
              return 0
@@ -212,9 +221,9 @@ function editCandidate(candidatesList) {
 
 // Delete candidates
 function DeletionNum(candidatesList) {
-    let candidateNum = Number(prompt("How many candidates you want to delete ? "))
+    let candidateNum = validNumber("How many candidates you want to delete ? ")
     for (let i = 1; i <= candidateNum; i++) {
-    let candidateId = Number(prompt("Enter the candidate ID: "))
+    let candidateId = validNumber("Enter the candidate ID: ")
         DeleteCandidate(candidatesList, candidateId)
     }
 
@@ -235,7 +244,7 @@ function DeleteCandidate(candidatesList, candidateId) {
 
 // Search for candidates
 function searchForCandidate(candidatesList) {
-    let candidateName = prompt("Enter the candidate last name: ")
+    let candidateName = validString("Enter the candidate last name: ")
     for (let candidate of candidatesList) {
         if (candidate.lastName == candidateName) {
             console.log("Candidate is found!")
@@ -288,7 +297,21 @@ function statistics(candidatesList) {
     }
 
 
-    
+    // Prompts Valider
+    function validNumber(promp) {
+        let input 
+        do {
+        input = Number(prompt(promp))
+        } while (isNaN(input) || input === 0 && input == "")
+            return input
+    }
+    function validString(promp) {
+        let input
+        do {
+            input = prompt(promp)
+        } while (input === "" || /\d/.test(input))
+            return input
+    }
 
     
     
