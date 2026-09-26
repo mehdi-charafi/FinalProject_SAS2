@@ -62,6 +62,9 @@ switch (choice) {
     case 0:
         console.log("Exit!");
          process.exit(0);
+    
+    default:
+        console.log("Invalid Choice!")
 
 
 }
