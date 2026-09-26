@@ -85,7 +85,10 @@ function addCandidate(candidatesList) {
     }
     let lastName = validString("Last Name: ")
     let firstName = validString("First Name: ")
-    let politicalParty = validString("Political Party: ")
+    let politicalParty = prompt("Political Party: ")
+    if (politicalParty.trim() == "") {
+        politicalParty = "Independent"
+    }
     let age = Number(validNumber("Age: "))
 
     let candidate = {
@@ -318,7 +321,7 @@ function statistics(candidatesList) {
         let input
         do {
             input = prompt(promp)
-        } while (input === "" || /\d/.test(input))
+        } while (input.trim() === "" || /\d/.test(input))
             return input
     }
 
