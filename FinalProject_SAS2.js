@@ -120,10 +120,10 @@ function AffichageTypes(candidatesList) {
 function candidatesAffichage (candidatesList) {
     let sorted = sortCandidates(candidatesList)
     console.log(`--- Candidates List ---`)
-
+        let count = 0;
     for (let candidate of sorted) {
-        let n = sorted.indexOf(candidate) + 1
-        console.log(`# Candidat ${n}:`)
+        count++
+        console.log(`# Candidat ${count}:`)
         console.log(`CIN: ${candidate.cin}`)
         console.log(`last Name: ${candidate.lastName}`)
         console.log(`First Name: ${candidate.firstName}`)
@@ -139,9 +139,10 @@ function affichageByFilter(candidatesList, filter) {
     console.log("Nothing is found!")
     return 0
    }
+   let count = 0;
    for (let candidate of filtered) {
-        let n = filtered.indexOf(candidate) + 1
-        console.log(`# Candidat ${n}:`)
+        dount++
+        console.log(`# Candidat ${count}:`)
         console.log(`CIN: ${candidate.cin}`)
         console.log(`last Name: ${candidate.lastName}`)
         console.log(`First Name: ${candidate.firstName}`)
