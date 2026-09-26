@@ -60,7 +60,8 @@ switch (choice) {
         statistics(candidates)
         continue
     case 0:
-        return 0
+        console.log("Exit!");
+         process.exit(0);
 
 
 }
@@ -77,7 +78,7 @@ function addCandidates(candidatesList) {
 }
 function addCandidate(candidatesList) {
 
-    let cin = validNumber("Cin: ")
+    let cin = prompt("Cin: ")
     if (candidatesList.find(can => can.cin == cin) != undefined) {
         console.log("The candidate ID is already used!")
         return 0
@@ -141,7 +142,7 @@ function affichageByFilter(candidatesList, filter) {
    }
    let count = 0;
    for (let candidate of filtered) {
-        dount++
+        count++
         console.log(`# Candidat ${count}:`)
         console.log(`CIN: ${candidate.cin}`)
         console.log(`last Name: ${candidate.lastName}`)
@@ -180,9 +181,9 @@ function VotersNumber (candidatesList) {
     }
 }   
 function voteForCandidate(candidatesList) {
-    let voterId = validNumber("Enter Your ID: ")
+    let voterId = prompt("Enter Your ID: ")
     if (!votersIds.includes(voterId)) {
-        let candidateId = validNumber("Enter The Candidate ID: ")
+        let candidateId = prompt("Enter The Candidate ID: ")
         for (let candidate of candidatesList) {
             if (candidate.cin == candidateId) {
                 candidate.voters.push(voterId)
@@ -204,7 +205,7 @@ function voteForCandidate(candidatesList) {
 function editCandidate(candidatesList) {
     console.log(`--- Edit Candidates ---`)
 
-    let id = validNumber("Enter the candidate ID: ")
+    let id = prompt("Enter the candidate ID: ")
     
     for (let candidate of candidatesList) {
         if (candidate.cin == id) {
@@ -232,7 +233,7 @@ function editCandidate(candidatesList) {
 function DeletionNum(candidatesList) {
     let candidateNum = validNumber("How many candidates you want to delete ? ")
     for (let i = 1; i <= candidateNum; i++) {
-    let candidateId = validNumber("Enter the candidate ID: ")
+    let candidateId = prompt("Enter the candidate ID: ")
         DeleteCandidate(candidatesList, candidateId)
     }
 
