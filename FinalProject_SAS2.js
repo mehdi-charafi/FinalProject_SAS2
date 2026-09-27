@@ -25,7 +25,7 @@ const candidates = [
 
 
 
-// switch
+// Menu
 while(true) {
     console.log("0. Exit")
     console.log("1. Add Candidates")
@@ -91,6 +91,7 @@ function addCandidate(candidatesList) {
     let politicalParty = prompt("Political Party: ")
     if (politicalParty.trim() == "") {
         politicalParty = "Independent"
+        console.log(`Political Party Set to "Independent"`)
     }
     let age = Number(validNumber("Age: "))
 
@@ -103,6 +104,7 @@ function addCandidate(candidatesList) {
         voters: []
     }
     candidatesList.push(candidate)
+    console.log("Candidates is added successfully!")
 }
 
 
