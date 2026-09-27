@@ -265,7 +265,14 @@ function searchForCandidate(candidatesList) {
     for (let candidate of candidatesList) {
         if (candidate.lastName == candidateName) {
             console.log("Candidate is found!")
-            console.log(candidate)
+            console.log(`------------`)
+            console.log(`CIN: ${candidate.cin}`)
+            console.log(`last Name: ${candidate.lastName}`)
+            console.log(`First Name: ${candidate.firstName}`)
+            console.log(`Political Party: ${candidate.politicalParty}`)
+            console.log(`Age: ${candidate.age}`)
+            console.log(`Voters: ${candidate.voters.length}`)
+            console.log(`------------`)
             return 0
         }
     }
