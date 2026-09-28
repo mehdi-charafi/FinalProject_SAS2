@@ -143,7 +143,7 @@ function candidatesAffichage (candidatesList) {
     }
 }
 function affichageByFilter(candidatesList, filter) {
-   let filtered = candidatesList.filter(can => can.politicalParty == filter)
+   let filtered = candidatesList.filter(can => can.politicalParty.toLowerCase() == filter.toLowerCase())
    if (filtered.length == 0) {
     console.log("Nothing is found!")
     return 0
@@ -318,6 +318,7 @@ function statistics(candidatesList) {
     for (let party in partyCounts) {
        console.log(`${party}: ${partyCounts[party]}`);
     }
+    console.log("")
     }
 
 
