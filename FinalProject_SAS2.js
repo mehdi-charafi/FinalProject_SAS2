@@ -321,7 +321,7 @@ function statistics(candidatesList) {
     for (let party in partyCounts) {
        console.log(`${party}: ${partyCounts[party]}`);
     }
-    console.log("")
+    console.log("------------")
     }
 
 
