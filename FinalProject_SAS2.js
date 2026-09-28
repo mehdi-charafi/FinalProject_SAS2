@@ -96,7 +96,7 @@ function addCandidate(candidatesList) {
         politicalParty = "Independent"
         console.log(`Political Party Set to "Independent"`)
     }
-    let age = Number(validNumber("Age: "))
+    let age = validNumber("Age: ")
 
     let candidate = {
         cin: cin,
