@@ -263,7 +263,7 @@ function DeleteCandidate(candidatesList, candidateId) {
 function searchForCandidate(candidatesList) {
     let candidateName = validString("Enter the candidate last name: ")
     for (let candidate of candidatesList) {
-        if (candidate.lastName == candidateName) {
+        if (candidate.lastName.toLowerCase() == candidateName.toLowerCase()) {
             console.log("Candidate is found!")
             console.log(`------------`)
             console.log(`CIN: ${candidate.cin}`)
