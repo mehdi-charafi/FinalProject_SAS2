@@ -83,7 +83,10 @@ function addCandidate(candidatesList) {
 
     let cin = prompt("Cin: ")
     if (candidatesList.find(can => can.cin == cin) != undefined) {
-        console.log("The candidate ID is already used!")
+        console.log("The candidate CIN is already used!")
+        return 0
+    } else if (cin.trim() == "") {
+        console.log("You must enter a valid CIN!")
         return 0
     }
     let lastName = validString("Last Name: ")
